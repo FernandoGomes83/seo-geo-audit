@@ -1,6 +1,6 @@
 ---
 name: seo-geo-audit
-description: Auditoria de SEO técnico + prontidão para IA (GEO/AEO), espelhando a ferramenta Automarticles. Gera duas notas 0-100 (SEO e GEO) e uma lista de itens verde/âmbar/vermelho com correção concreta. Modo híbrido — audita a URL ao vivo e/ou o código-fonte (Next.js: metadata, robots.ts, sitemap.ts, JSON-LD). Use quando o usuário pedir análise/checklist de SEO, GEO, AEO, "otimização para IA", ranquear no Google, ser citado por ChatGPT/Perplexity, ou revisar SEO de uma página antes do deploy.
+description: 'Auditoria de SEO técnico + prontidão para IA (GEO/AEO), espelhando a ferramenta Automarticles. Gera duas notas 0-100 (SEO e GEO) e uma lista de itens verde/âmbar/vermelho com correção concreta. Modo híbrido — audita a URL ao vivo e/ou o código-fonte (Next.js: metadata, robots.ts, sitemap.ts, JSON-LD). Use quando o usuário pedir análise/checklist de SEO, GEO, AEO, "otimização para IA", ranquear no Google, ser citado por ChatGPT/Perplexity, ou revisar SEO de uma página antes do deploy.'
 ---
 
 # Auditoria de SEO + GEO/AEO
