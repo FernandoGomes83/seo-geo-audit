@@ -63,3 +63,5 @@ Faixas replicam a ferramenta Automarticles. Peso igual por critério dentro de c
 - **Sempre** compare o servido ao vivo com o fonte do repo: num caso real, `robots.ts` liberava tudo,
   mas o `robots.txt` em produção tinha `Host:` + `Content-Signal:` (linhas inválidas) e bloqueava
   os crawlers de IA — divergência que só o modo híbrido pega.
+- **Divergências registradas** (uma linha cada: data, URL, item, ferramenta × coletor, o que mudou):
+  - nenhuma ainda.
