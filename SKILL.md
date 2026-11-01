@@ -26,9 +26,10 @@ Cada critério, dentro da sua nota, tem **peso igual**:
 1. **Descubra o alvo.** URL ao vivo, arquivos do repo, ou os dois (híbrido). Se o usuário deu
    URL e o site está no ar → priorize o coletor ao vivo. Se pediu revisão pré-deploy → audite o repo.
 2. **Colete ao vivo** (se houver URL):
-   `node <skill>/scripts/collect.mjs <url>` → JSON com verdict + evidência de cada check e as
+   `node "${CLAUDE_SKILL_DIR}/scripts/collect.mjs" <url>` → JSON com verdict + evidência de cada check e as
    notas já calculadas. Use `--no-linkcheck` para pular a amostra de links quebrados (mais rápido).
-   Roda com `node` puro (Node 18+, `fetch` nativo) — **não** precisa instalar nada.
+   Roda com `node` puro (Node 18+, `fetch` nativo) — **não** precisa instalar nada. Fora do Claude Code,
+   o caminho é `scripts/collect.mjs` dentro da pasta desta skill.
 3. **Renderize pós-JS** (quando o check "Conteúdo no HTML cru" der baixo ou for SPA): use as
    ferramentas de navegador disponíveis (Claude in Chrome, Playwright, headless Chrome) pra comparar o texto do HTML inicial com o
    texto após o JS. Crawlers de IA **não** rodam JS — o que importa é o HTML cru.
@@ -36,6 +37,10 @@ Cada critério, dentro da sua nota, tem **peso igual**:
    `src/app/**/metadata`/`generateMetadata` (title 50-60, description 120-160, OG/Twitter),
    `src/app/robots.ts`, `src/app/sitemap.ts`, blocos JSON-LD, `llms.txt`. **Compare com o ao vivo**:
    robots/sitemap servidos podem divergir do fonte (deploy antigo, edge, `_headers`).
+   **Astro:** `site` no `astro.config.*` (base do canonical e do sitemap), `@astrojs/sitemap`,
+   `public/robots.txt` ou `src/pages/robots.txt.ts`, `<head>` e JSON-LD no layout base,
+   `public/llms.txt`. Na Cloudflare, confira também se a zona não injeta `robots.txt` gerenciado
+   nem bloqueia bots de IA (`ai_bots_protection`).
 5. **Julgue os itens que pedem IA** (o coletor marca `needs_review`): **Proposta de valor clara
    no topo** — leia o começo da página e diga se deixa claro *o que é, pra quem, o que resolve*.
 6. **Monte o relatório** no formato abaixo.
@@ -79,3 +84,6 @@ Para cada 🔴/🟡 dê a **correção concreta** e, no modo híbrido, **o arqui
   `robots.txt` servido bloqueia crawlers de IA — caso real que motivou a skill).
 - O coletor não instala nada (só `node`); use o gerenciador de pacotes do projeto se precisar de algo.
 - Não invente números: toda evidência vem do coletor, do browser ou do arquivo lido.
+- **Calibração:** se a nota ou um item divergir do que a Automarticles mostra para a mesma URL,
+  registre em `references/criteria.md`, seção Notas de calibração (data, URL, item, valor da
+  ferramenta × do coletor) e, se for erro do coletor, corrija o `collect.mjs` no mesmo commit.
